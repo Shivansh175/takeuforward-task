@@ -15,9 +15,14 @@ export async function getCards(){
     return rows;
 }
 
-export async function getCard(id){
-    const [row] = await pool.query(`SELECT * FROM cards WHERE id = ?`,[id]);
-    return row[0];
+export async function editCard(id, front, back){
+    await pool.query(`
+        UPDATE cards SET front = ?, back = ? WHERE id = ?`,[front, back, id]);
+}
+
+export async function deleteCard(id){
+    await pool.query(`DELETE FROM cards WHERE id = ?`,[id]);
+    // return row[0];
 }
 
 export async function createCard(front, back){
@@ -29,6 +34,6 @@ export async function createCard(front, back){
     // console.log(result);
     const id = result[0].insertId
     // console.log(id);
-    return getCard(id);
+    // return getCard(id);
 }
 
