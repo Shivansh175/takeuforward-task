@@ -12,7 +12,7 @@ app.listen(port,()=>{
     console.log(`Listening on ${port}`);
 })
 
-app.get("/cards", async (req,res)=>{
+app.get("/api/cards", async (req,res)=>{
     const cards = await getCards();
     res.send(cards);
 })
